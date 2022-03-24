@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="4be87607-001c-4e81-bbf9-d32660190ab0" name="변경" comment="">
+      <change beforePath="$PROJECT_DIR$/bin/scripts/makeCollection.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/scripts/makeCollection.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/scripts/makeKeyword.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/scripts/makeKeyword.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/collection.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.post" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SimpleIR/scripts/indexer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SimpleIR/scripts/indexer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SimpleIR/scripts/kuir.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SimpleIR/scripts/kuir.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SimpleIR/scripts/makeKeyword.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SimpleIR/scripts/makeKeyword.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CreateXmlData.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SimpleIR.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/StoreXmlFile.java" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/src" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="26Aeei4k9g0Awu8h3R6XRblezzE" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="project.structure.last.edited" value="라이브러리" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="preferences.general" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/html" />
+    </key>
+  </component>
+  <component name="RunManager" selected="애플리케이션.kuir">
+    <configuration name="SimpleIR" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="SimpleIR" />
+      <module name="SimpleIR" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="kuir" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="scripts.kuir" />
+      <module name="SimpleIR" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="scripts.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="애플리케이션.kuir" />
+        <item itemvalue="애플리케이션.SimpleIR" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="애플리케이션 수준" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="디폴트 작업">
+      <changelist id="4be87607-001c-4e81-bbf9-d32660190ab0" name="변경" comment="" />
+      <created>1646870916507</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1646870916507</updated>
+      <workItem from="1646870918254" duration="6771000" />
+      <workItem from="1647475181479" duration="4644000" />
+      <workItem from="1647482708318" duration="3805000" />
+      <workItem from="1647928588244" duration="2949000" />
+      <workItem from="1647937492179" duration="341000" />
+      <workItem from="1648080220248" duration="10799000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
