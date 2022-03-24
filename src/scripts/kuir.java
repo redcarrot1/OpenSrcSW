@@ -20,6 +20,14 @@ public class kuir {
                 indexer indexer = new indexer(path);
                 indexer.makeIndexPost();
             }
+            case "-a" -> {
+                makeCollection collection = new makeCollection("html");
+                collection.makeXml();
+                makeKeyword keyword = new makeKeyword("collection.xml");
+                keyword.convertXml();
+                indexer indexer = new indexer("index.xml");
+                indexer.makeIndexPost();
+            }
         }
 
         //전체 코드 돌리기!!
