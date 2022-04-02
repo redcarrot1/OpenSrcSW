@@ -16,8 +16,15 @@
 <br>
 
 #### 4주차
-`java -cp ./jars/jsoup-1.14.3.jar:./jars/kkma-2.1.jar:bin scripts.kuir -i /index.xml`
+`java -cp ./jars/jsoup-1.14.3.jar:./jars/kkma-2.1.jar:bin scripts.kuir -i index.xml`
 <br>
+
+#### 5주차
+
+`java -cp ./jars/jsoup-1.14.3.jar:./jars/kkma-2.1.jar:bin scripts.kuir -s index.post -q "yourQuery"`
+<br>
+
+
 
 #### 전체 주차(파일은 defalut로 세팅됩니다.)
 `java -cp ./jars/jsoup-1.14.3.jar:./jars/kkma-2.1.jar:bin scripts.kuir -a /`
