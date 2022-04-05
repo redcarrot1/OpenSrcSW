@@ -21,7 +21,7 @@ import java.util.List;
 public class searcher {
     private final String query;
     private final String input_file;
-    private final String collectionFile = "./collection.xml"; // 수정 필요
+    private final String collectionFile = "./index.xml"; // 수정 필요
     private int docNum;
     private int keywordSize;
 
@@ -38,7 +38,7 @@ public class searcher {
 
         List<Pair_similar_docId> similarity = calculateSimilarity(docIndex, queryIndex);
         if (keywordSize == 0) {
-            System.out.println("No match anything!");
+            System.out.println("검색된 문서가 없습니다.");
             return;
         }
 
