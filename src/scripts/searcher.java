@@ -21,11 +21,64 @@ import java.util.List;
 public class searcher {
     private final String query;
     private final String input_file;
-    int docNum = 5; // 수정 필요
+    private final String collectionFile = "./index.xml"; // 수정 필요
+    private int docNum;
+    private int keywordSize;
 
     public searcher(String input_file, String query) {
-        this.query = query;
         this.input_file = input_file;
+        this.query = query;
+    }
+
+    public void calcSim() throws Exception {
+        System.out.println("input query = " + query);
+        List<List<Double>> docIndex = new ArrayList<>();
+        List<Integer> queryIndex = new ArrayList<>();
+        makeDocIndexAndQueryIndex(docIndex, queryIndex);
+
+        List<Pair_similar_docId> similarity = calculateSimilarity(docIndex, queryIndex);
+        if (keywordSize == 0) {
+            System.out.println("검색된 문서가 없습니다.");
+            return;
+        }
+
+        HashMap<Integer, String> title = makeTitleMapById();
+
+        for (int i = 0; i < 3; i++) {
+            if (similarity.get(i).similarity != 0)
+                System.out.println("문서 title = " + title.get(similarity.get(i).id) + ",  유사도 = " + Math.round(similarity.get(i).similarity * 100) / 100.0);
+            else break;
+        }
+        System.out.println("5주차 실행완료");
+    }
+
+    private void makeDocIndexAndQueryIndex(List<List<Double>> docIndex, List<Integer> queryIndex) throws IOException, ClassNotFoundException {
+        HashMap<String, String> invertedFile = openInputFile();
+        KeywordExtractor ke = new KeywordExtractor();
+        KeywordList kl = ke.extractKeyword(query, true);
+        keywordSize = kl.size();
+        System.out.print("검색된 쿼리 단어 = ");
+        for (Keyword kwrd : kl) {
+            int queryWeight = kwrd.getCnt();
+            queryIndex.add(queryWeight);
+
+            String queryWord = kwrd.getString();
+            System.out.print(queryWord+"  ");
+            if (invertedFile.containsKey(queryWord)) {
+                String[] strList = invertedFile.get(queryWord).split(" ");
+                docIndex.add(extractDocTF(strList));
+                docNum = strList.length / 2;
+            } else keywordSize -= 1;
+        }
+        System.out.println();
+    }
+
+    private List<Double> extractDocTF(String[] strList) {
+        List<Double> docTF = new ArrayList<>();
+        for (int j = 1; j < strList.length; j += 2) {
+            docTF.add(Double.parseDouble(strList[j]));
+        }
+        return docTF;
     }
 
     private HashMap<String, String> openInputFile() throws IOException, ClassNotFoundException {
@@ -33,63 +86,30 @@ public class searcher {
         ObjectInputStream objectInputStream = new ObjectInputStream(fileStream);
         Object object = objectInputStream.readObject();
         objectInputStream.close();
+        if (object == null) System.out.println("input_file error!");
         return (HashMap<String, String>) object;
     }
 
-    private List<Pair> calcSim(List<List<Double>> index, List<Integer> queryIndex, int keywordNumber) {
-        List<Pair> calc = new ArrayList<>();
+    private List<Pair_similar_docId> calculateSimilarity(List<List<Double>> docIndex, List<Integer> queryIndex) {
+        List<Pair_similar_docId> similarity = new ArrayList<>();
         for (int i = 0; i < docNum; i++) {
             double w = 0;
-            for (int k = 0; k < keywordNumber; k++) {
-                w += (queryIndex.get(k) * index.get(k).get(i));
+            for (int k = 0; k < keywordSize; k++) {
+                w += (queryIndex.get(k) * docIndex.get(k).get(i));
             }
-            calc.add(new Pair(w, i));
+            similarity.add(new Pair_similar_docId(w, i));
         }
-        calc.sort(new PairComparator());
-        return calc;
+        similarity.sort(new PairComparator());
+        return similarity;
     }
 
-    public void search() throws Exception {
-        HashMap<String, String> map = openInputFile();
-        KeywordExtractor ke = new KeywordExtractor();
-        KeywordList kl = ke.extractKeyword(query, true);
-
-        List<List<Double>> index = new ArrayList<>();
-        List<Integer> queryIndex = new ArrayList<>();
-        for (Keyword kwrd : kl) {
-            String word = kwrd.getString();
-            int weight = kwrd.getCnt();
-            queryIndex.add(weight);
-
-            String wStr = map.get(word);
-            String[] strList = wStr.split(" ");
-            List<Double> temp = new ArrayList<>();
-            for (int j = 0; j < strList.length / 2; j++) {
-                temp.add(Double.parseDouble(strList[j * 2 + 1]));
-            }
-            index.add(temp);
-        }
-
-        List<Pair> calc = calcSim(index, queryIndex, kl.size());
-        HashMap<Integer, String> title = makeTitleMapById();
-
-        for (int i = 0; i < 3; i++) {
-            if (calc.get(i).value != 0)
-                System.out.println("문서 title = " + title.get(calc.get(i).id) + ",  유사도 = " + Math.round(calc.get(i).value * 100) / 100.0);
-            else break;
-        }
-    }
 
     private HashMap<Integer, String> makeTitleMapById() throws ParserConfigurationException, IOException, SAXException {
-        HashMap<Integer, String> title = new HashMap<>();
-        File collectionXml = new File("./collection.xml"); // 수정 필요
+        File collectionXml = new File(collectionFile);
         DocumentBuilder docBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-        org.w3c.dom.Document doc = docBuilder.newDocument();
-        org.w3c.dom.Element docsElement = doc.createElement("docs");
-        doc.appendChild(docsElement);
-
         NodeList nodeList = createNodeList(docBuilder, collectionXml);
 
+        HashMap<Integer, String> title = new HashMap<>();
         for (int i = 0; i < nodeList.getLength(); i++) {
             String id = nodeList.item(i).getAttributes().getNamedItem("id").getNodeValue();
             NodeList childNodes = nodeList.item(i).getChildNodes();
@@ -109,21 +129,21 @@ public class searcher {
         return document.getElementsByTagName("doc");
     }
 
-    static class Pair {
-        Double value;
+    static class Pair_similar_docId {
+        Double similarity;
         Integer id;
 
-        public Pair(Double value, Integer id) {
-            this.value = value;
+        public Pair_similar_docId(Double similarity, Integer id) {
+            this.similarity = similarity;
             this.id = id;
         }
     }
 
-    static class PairComparator implements Comparator<Pair> {
+    static class PairComparator implements Comparator<Pair_similar_docId> {
         @Override
-        public int compare(Pair f1, Pair f2) {
-            if (f1.value > f2.value) return -1;
-            else if (f1.value < f2.value) return 1;
+        public int compare(Pair_similar_docId p1, Pair_similar_docId p2) {
+            if (p1.similarity > p2.similarity) return -1;
+            else if (p1.similarity < p2.similarity) return 1;
             return 0;
         }
     }

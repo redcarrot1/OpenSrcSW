@@ -21,10 +21,12 @@ public class kuir {
                 indexer indexer = new indexer(path);
                 indexer.makeIndexPost();
             }
-            case "-s"->{
-                String query = args[4];
-                searcher searcher = new searcher(path, query);
-                searcher.search();
+            case "-s" -> {
+                if (args[2].equals("-q")) {
+                    String query = args[3];
+                    searcher searcher = new searcher(path, query);
+                    searcher.calcSim();
+                } else System.out.println("Input query(-q {yourQuery})");
             }
             case "-a" -> {
                 makeCollection collection = new makeCollection("html");
@@ -34,22 +36,25 @@ public class kuir {
                 indexer indexer = new indexer("index.xml");
                 indexer.makeIndexPost();
                 searcher searcher = new searcher("./index.post", "라면에는 면, 분말, 스프가 있다.");
-                searcher.search();
+                searcher.calcSim();
             }
 
         }
 
 
-        //전체 코드 돌리기!!
-/*
+        //전체 코드 돌리기(개발용)!!
+        /*
         makeCollection collection = new makeCollection("./html");
         collection.makeXml();
         makeKeyword keyword = new makeKeyword("./collection.xml");
         keyword.convertXml();
         indexer indexer = new indexer("index.xml");
         indexer.makeIndexPost();
-        searcher searcher = new searcher("./index.post", "대신, 모양, 때문");
-        searcher.search();
+
+        //searcher searcher = new searcher("./index.post", "대신, 모양, 때문");
+        searcher searcher = new searcher("./index.post", "대신, 없겠지");
+        searcher.calcSim();
+
  */
     }
 }
