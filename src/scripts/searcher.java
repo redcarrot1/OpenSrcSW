@@ -57,17 +57,20 @@ public class searcher {
         KeywordExtractor ke = new KeywordExtractor();
         KeywordList kl = ke.extractKeyword(query, true);
         keywordSize = kl.size();
+        System.out.print("검색된 쿼리 단어 = ");
         for (Keyword kwrd : kl) {
             int queryWeight = kwrd.getCnt();
             queryIndex.add(queryWeight);
 
             String queryWord = kwrd.getString();
+            System.out.print(queryWord+"  ");
             if (invertedFile.containsKey(queryWord)) {
                 String[] strList = invertedFile.get(queryWord).split(" ");
                 docIndex.add(extractDocTF(strList));
                 docNum = strList.length / 2;
             } else keywordSize -= 1;
         }
+        System.out.println();
     }
 
     private List<Double> extractDocTF(String[] strList) {
