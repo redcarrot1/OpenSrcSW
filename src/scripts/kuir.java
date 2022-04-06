@@ -4,7 +4,7 @@ public class kuir {
 
     public static void main(String[] args) throws Exception {
 
-        /*
+
         String command = args[0];
         String path = args[1];
 
@@ -37,11 +37,11 @@ public class kuir {
                 searcher.search();
             }
 
-        }*/
+        }
 
 
         //전체 코드 돌리기!!
-
+/*
         makeCollection collection = new makeCollection("./html");
         collection.makeXml();
         makeKeyword keyword = new makeKeyword("./collection.xml");
@@ -50,5 +50,6 @@ public class kuir {
         indexer.makeIndexPost();
         searcher searcher = new searcher("./index.post", "대신, 모양, 때문");
         searcher.search();
+ */
     }
 }
