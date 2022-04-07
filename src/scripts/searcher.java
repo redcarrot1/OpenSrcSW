@@ -30,7 +30,7 @@ public class searcher {
         this.query = query;
     }
 
-    public void calcSim() throws Exception {
+    public void tempMethod() throws Exception {
         System.out.println("input query = " + query);
         List<List<Double>> docIndex = new ArrayList<>();
         List<Integer> queryIndex = new ArrayList<>();

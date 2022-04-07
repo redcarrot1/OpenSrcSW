@@ -25,7 +25,7 @@ public class kuir {
                 if (args[2].equals("-q")) {
                     String query = args[3];
                     searcher searcher = new searcher(path, query);
-                    searcher.calcSim();
+                    searcher.tempMethod();
                 } else System.out.println("Input query(-q {yourQuery})");
             }
             case "-a" -> {
@@ -36,7 +36,7 @@ public class kuir {
                 indexer indexer = new indexer("index.xml");
                 indexer.makeIndexPost();
                 searcher searcher = new searcher("./index.post", "라면에는 면, 분말, 스프가 있다.");
-                searcher.calcSim();
+                searcher.tempMethod();
             }
 
         }
