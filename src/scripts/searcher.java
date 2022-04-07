@@ -30,13 +30,14 @@ public class searcher {
         this.query = query;
     }
 
-    public void calcSim() throws Exception {
+    public void call() throws Exception {
         System.out.println("input query = " + query);
         List<List<Double>> docIndex = new ArrayList<>();
         List<Integer> queryIndex = new ArrayList<>();
         makeDocIndexAndQueryIndex(docIndex, queryIndex);
 
-        List<Pair_similar_docId> similarity = calculateSimilarity(docIndex, queryIndex);
+        List<Double> innerProductResult = innerProduct(docIndex, queryIndex);
+        List<Pair_similar_docId> similarity = calcSim(docIndex, queryIndex, innerProductResult);
         if (keywordSize == 0) {
             System.out.println("검색된 문서가 없습니다.");
             return;
@@ -63,7 +64,7 @@ public class searcher {
             queryIndex.add(queryWeight);
 
             String queryWord = kwrd.getString();
-            System.out.print(queryWord+"  ");
+            System.out.print(queryWord + "  ");
             if (invertedFile.containsKey(queryWord)) {
                 String[] strList = invertedFile.get(queryWord).split(" ");
                 docIndex.add(extractDocTF(strList));
@@ -90,14 +91,33 @@ public class searcher {
         return (HashMap<String, String>) object;
     }
 
-    private List<Pair_similar_docId> calculateSimilarity(List<List<Double>> docIndex, List<Integer> queryIndex) {
-        List<Pair_similar_docId> similarity = new ArrayList<>();
+    private List<Double> innerProduct(List<List<Double>> docIndex, List<Integer> queryIndex) {
+        List<Double> innerProductResult = new ArrayList<>();
         for (int i = 0; i < docNum; i++) {
             double w = 0;
             for (int k = 0; k < keywordSize; k++) {
                 w += (queryIndex.get(k) * docIndex.get(k).get(i));
             }
-            similarity.add(new Pair_similar_docId(w, i));
+            innerProductResult.add(w);
+        }
+        return innerProductResult;
+    }
+
+    private List<Pair_similar_docId> calcSim(List<List<Double>> docIndex, List<Integer> queryIndex, List<Double> innerProductResult) {
+        List<Pair_similar_docId> similarity = new ArrayList<>();
+        for (int i = 0; i < docNum; i++) {
+            if (innerProductResult.get(i) == 0)
+                similarity.add(new Pair_similar_docId(0.0, i));
+            else {
+                double queryWeight = 0, docWeight = 0;
+                for (int k = 0; k < keywordSize; k++) {
+                    queryWeight += (queryIndex.get(k) * queryIndex.get(k));
+                    docWeight += (docIndex.get(k).get(i) * docIndex.get(k).get(i));
+                }
+                queryWeight = Math.sqrt(queryWeight);
+                docWeight = Math.sqrt(docWeight);
+                similarity.add(new Pair_similar_docId(innerProductResult.get(i) / (queryWeight * docWeight), i));
+            }
         }
         similarity.sort(new PairComparator());
         return similarity;
