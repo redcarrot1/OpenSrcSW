@@ -30,7 +30,7 @@ public class searcher {
         this.query = query;
     }
 
-    public void call() throws Exception {
+    public void cosineSimilarity() throws Exception {
         System.out.println("input query = " + query);
         List<List<Double>> docIndex = new ArrayList<>();
         List<Integer> queryIndex = new ArrayList<>();
