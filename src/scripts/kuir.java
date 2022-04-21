@@ -28,6 +28,14 @@ public class kuir {
                     searcher.cosineSimilarity();
                 } else System.out.println("Input query(-q {yourQuery})");
             }
+            case "-m" -> {
+                if (args[2].equals("-q")) {
+                    String query = args[3];
+                    MidTerm midTerm = new MidTerm(path, query);
+                    midTerm.showSnippet();
+                } else System.out.println("Input query(-q {yourQuery})");
+            }
+            /*
             case "-a" -> {
                 makeCollection collection = new makeCollection("html");
                 collection.makeXml();
@@ -38,7 +46,7 @@ public class kuir {
                 searcher searcher = new searcher("./index.post", "라면에는 면, 분말, 스프가 있다.");
                 searcher.cosineSimilarity();
             }
-
+             */
         }
 
 
