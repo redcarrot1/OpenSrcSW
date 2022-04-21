@@ -48,21 +48,5 @@ public class kuir {
             }
              */
         }
-
-
-        //전체 코드 돌리기(개발용)!!
-        /*
-        makeCollection collection = new makeCollection("./html");
-        collection.makeXml();
-        makeKeyword keyword = new makeKeyword("./collection.xml");
-        keyword.convertXml();
-        indexer indexer = new indexer("index.xml");
-        indexer.makeIndexPost();
-
-        //searcher searcher = new searcher("./index.post", "대신, 모양, 때문");
-        searcher searcher = new searcher("./index.post", "대신, 없겠지");
-        searcher.calcSim();
-
- */
     }
 }
