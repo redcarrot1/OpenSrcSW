@@ -35,18 +35,6 @@ public class kuir {
                     midTerm.showSnippet();
                 } else System.out.println("Input query(-q {yourQuery})");
             }
-            /*
-            case "-a" -> {
-                makeCollection collection = new makeCollection("html");
-                collection.makeXml();
-                makeKeyword keyword = new makeKeyword("collection.xml");
-                keyword.convertXml();
-                indexer indexer = new indexer("index.xml");
-                indexer.makeIndexPost();
-                searcher searcher = new searcher("./index.post", "라면에는 면, 분말, 스프가 있다.");
-                searcher.cosineSimilarity();
-            }
-             */
         }
 
 
